@@ -1,0 +1,5 @@
+*
+!Dockerfile
+!scripts/
+!scripts/start.mjs
+!scripts/check-sandbox.mjs
