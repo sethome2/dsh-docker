@@ -65,8 +65,8 @@ jobs:
           mkdir -p workspace
           sudo chown 1000:1000 workspace
           docker compose run --rm --no-deps --entrypoint dsh dsh --version
-          docker compose run --rm --no-deps --entrypoint node dsh /opt/dsh/check-sandbox.mjs
-          node scripts/smoke.mjs
+          docker compose run --rm --no-deps -v "$PWD/test:/opt/dsh/test:ro" --entrypoint sh dsh /opt/dsh/test/check-sandbox.sh
+          node test/smoke.mjs
       - name: Container diagnostics
         if: failure()
         run: docker compose logs --no-color --tail=200

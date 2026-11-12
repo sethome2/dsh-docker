@@ -44,6 +44,12 @@ async function waitForPage() {
 }
 
 compose('up', '-d');
+const workspace = '/home/node/Documents/deepseek-harness/default-workspace';
+assert.equal(compose('exec', '-T', 'dsh', 'pwd').trim(), workspace);
+const documents = compose('exec', '-T', 'dsh', 'xdg-user-dir', 'DOCUMENTS').trim();
+assert.equal(`${documents}/deepseek-harness/default-workspace`, workspace,
+  'Official default workspace must resolve to the mounted working directory');
+compose('exec', '-T', 'dsh', 'test', '-w', workspace);
 await waitForPage();
 const profile = compose('exec', '-T', 'dsh', 'bash', '-c', 'cat "$DSH_HOME/profiles/web/package.json"');
 compose('exec', '-T', 'dsh', 'bash', '-c', 'printf persisted > "$DSH_HOME/.container-smoke"');
