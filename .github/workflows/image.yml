@@ -1,6 +1,8 @@
 name: Build, test and publish
 
 on:
+  schedule:
+    - cron: '0 20 * * *' # Daily at 04:00 Asia/Shanghai (20:00 UTC).
   push:
     branches: [main]
   pull_request:

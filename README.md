@@ -3,6 +3,10 @@
 使用 Debian 基础镜像运行的干净且官方的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) Web UI。
 GitHub Actions 会自动构建并发布到 GHCR。 当然你也可以手动构建docker包保持安全性。
 
+每天北京时间 04:00，GitHub Actions 会读取上游 npm `latest` 版本，构建镜像并运行沙箱、Web 和持久化测试。全部通过后发布到 `ghcr.io/sethome2/dsh-docker:latest`；
+使用 Docker Compose 部署时，在 `compose.yaml` 所在目录执行 `docker compose pull dsh && docker compose up -d --no-deps dsh` 即可更新容器，挂载的工作区和数据卷会保留。
+使用 `docker run` 部署时，先执行 `docker pull ghcr.io/sethome2/dsh-docker:latest`，再删除旧容器并按原启动参数重新创建，保留原有挂载。
+
 使用以下Docker 或者 Docker Compose 开始运行：
 
 ```sh
