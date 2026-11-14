@@ -8,6 +8,10 @@ services:
     volumes:
       - dsh-data:/home/node/.dsh
       - ./workspace:/home/node/Documents/deepseek-harness/default-workspace
-
+    # command:
+    #   - --public-url
+    #   - https://dsh.example.com/
+    #   - --trusted-host
+    #   - dsh.example.com
 volumes:
   dsh-data:
